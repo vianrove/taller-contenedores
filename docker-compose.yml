@@ -5,6 +5,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: test
+    volumes:
+      - mysql:/var/lib/mysql
     restart: always
   web:
     build: ./web
@@ -18,3 +20,9 @@ services:
     depends_on:
       - db
     restart: on-failure
+networks:
+  default:
+    name: my-network
+    driver: bridge
+volumes:
+  mysql:
